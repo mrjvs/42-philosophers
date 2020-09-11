@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include "boot.h"
 
-int	main(void) {
-	printf("hello\n");
-	return 1;
+int		main(void) {
+	boot_sequence(6);
+	return 0;
 }
