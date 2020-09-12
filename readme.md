@@ -23,6 +23,7 @@ make
  - [X] Remove printf statement in logger.c
  - [X] Dynamic sleep settings
  - [ ] Make all three programs (code generation)**
+ - [ ] Make system compatible with both Death goal and Eat goal at the same time
 
 \* Starvation checker thread sets the death state and prints if starved
 
