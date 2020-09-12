@@ -9,8 +9,10 @@ SOURCES=\
 	philosophers/entry.c \
 	philosophers/action.c \
 	philosophers/logger.c \
-	state/has_died.c \
-	boot/starter.c
+	philosophers/starve.c \
+	utils/string.c \
+	boot/starter.c \
+	boot/arg_parse.c
 
 OBJ=$(SOURCES:.c=.o)
 
