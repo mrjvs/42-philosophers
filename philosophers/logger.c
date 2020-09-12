@@ -11,17 +11,18 @@ long long	get_time_in_ms(void) {
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-static void	do_logging(int id, char *suffix) {
+static int	do_logging(int id, char *suffix) {
 	char	*out;
 
 	out = phil_make_log(get_time_in_ms(), id, suffix);
 	if (out == NULL)
-		return ;
+		return (0);
 	write(0, out, phil_strlen(out));
 	free(out);
+	return (1);
 }
 
-void		log_state(enum e_philstate state, int id) {
+int			log_state(enum e_philstate state, int id) {
 	char	*text;
 
 	if (state == Thinking)
@@ -36,5 +37,5 @@ void		log_state(enum e_philstate state, int id) {
 		text = "died\n";
 	else
 		text = "has been behaving unexpectedly\n";
-	do_logging(id, text);
+	return (do_logging(id, text));
 }

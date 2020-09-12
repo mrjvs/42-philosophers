@@ -11,7 +11,7 @@ static int	is_valid_int(char *str) {
 			return (0);
 		i++;
 	}
-	if (i > INT_CHARLEN || phil_atoi(str) > INT_MAXLEN)
+	if (i > INT_CHARLEN || (i == INT_CHARLEN && phil_atoi(str) > INT_MAXLEN))
 		return (0);
 	return (1);
 }
@@ -43,5 +43,6 @@ int		parse_args(int argc, char *argv[], t_phil_args *args) {
 		args->goal_data = args->amount;
 		args->eat_goal_amount = phil_atoi(argv[5]);
 	}
+	args->crash_exit = 0;
 	return (1);
 }

@@ -1,9 +1,14 @@
+#include <unistd.h>
 #include "boot.h"
 
 int		main(int argc, char *argv[]) {
 	t_phil_args	args;
 
-	if (parse_args(argc, argv, &args))
-		boot_sequence(&args);
-	return 0;
+	if (!parse_args(argc, argv, &args))
+		return (1);
+	if (!boot_sequence(&args)) {
+		write(1, "An error occured, whoops\n", 25);
+		return (1);
+	}
+	return (0);
 }

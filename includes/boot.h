@@ -21,6 +21,7 @@ typedef struct	s_phil_args {
 	enum e_goals	goal;
 	int				eat_goal_amount;
 	int				goal_data;
+	int				crash_exit;
 }				t_phil_args;
 
 typedef struct	s_thread_args
@@ -32,6 +33,6 @@ typedef struct	s_thread_args
 
 
 int		parse_args(int argc, char *argv[], t_phil_args *args);
-void	boot_sequence(t_phil_args *args);
+int		boot_sequence(t_phil_args *args);
 
 #endif

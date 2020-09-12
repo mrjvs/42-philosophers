@@ -50,12 +50,12 @@ char		*phil_make_log(long long time, int id, char *text) {
 	len = LLINT_CHARLEN + INT_CHARLEN + phil_strlen(text) + 3;
 	out = (char *)malloc(len);
 	if (out == NULL)
-		return out;
+		return (out);
 	memset(out, 0, len);
 	i = num_to_str(time, out);
 	out[i] = ' ';
 	i += num_to_str(id, out + i + 1) + 1;
 	out[i] = ' ';
 	phil_memcpy(text, out + i + 1);
-	return out;
+	return (out);
 }

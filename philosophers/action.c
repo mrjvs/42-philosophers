@@ -12,7 +12,7 @@ static int	do_eat(t_phil *phil) {
 	return (1);
 }
 
-void		do_action(t_phil *phil, int activity) {
+int			do_action(t_phil *phil, int activity) {
 	int	sleep_time;
 
 	if (activity == Thinking)
@@ -22,8 +22,10 @@ void		do_action(t_phil *phil, int activity) {
 	else if (activity == Eating) {
 		sleep_time = phil->args->time_to_eat;
 		if (!do_eat(phil))
-			return ;
+			return (0);
 	}
-	log_state(activity, phil->id);
+	if (!log_state(activity, phil->id))
+		return (0);
 	usleep(1000 * sleep_time);
+	return (1);
 }

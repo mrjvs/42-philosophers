@@ -14,21 +14,30 @@ static void	join_philosophers(t_phil_args *args, t_thread_args *tid) {
 	free(tid);
 }
 
-static void	start_philosophers(t_phil_args *args) {
+static int	start_philosophers(t_phil_args *args) {
 	int 			i;
 	t_thread_args	*tid;
 
 	tid = (t_thread_args *)malloc(args->amount * sizeof(t_thread_args));
+	if (tid == NULL)
+		return (0);
 	i = 0;
 	while (i < args->amount) {
 		tid[i].id = i;
 		tid[i].args = args;
-		pthread_create(&(tid[i].tid), NULL, create_philosopher, (void *__restrict)(&tid[i]));
+		if (pthread_create(&(tid[i].tid), NULL, create_philosopher, (void *__restrict)(&tid[i])) != 0)
+			args->crash_exit = 1;
 		i++;
 	}
 	join_philosophers(args, tid);
+	return (1);
 }
 
-void		boot_sequence(t_phil_args *args) {
-	start_philosophers(args);
+int			boot_sequence(t_phil_args *args) {
+	int	status;
+
+	status = start_philosophers(args);
+	if (!status || args->crash_exit)
+		return (0);
+	return (1);
 }
