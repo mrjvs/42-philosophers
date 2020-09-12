@@ -24,8 +24,6 @@ void			*create_philosopher(void *arg) {
 	phil = make_phil_state(((t_thread_args *)arg)->args, ((t_thread_args *)arg)->id);
 	start_starve_worker(&phil);
 	activity = 0;
-	if (phil.id == 4)
-		phil.args->crash_exit = 1;
 	while (should_run(&phil)) {
 		if (!do_action(&phil, activity))
 			phil.args->crash_exit = 1;
