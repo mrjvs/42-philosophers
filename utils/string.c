@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-
-# define LLINT_CHARLEN 19
-# define INT_CHARLEN 10
+#include "utils.h"
 
 size_t		phil_strlen(char *str) {
 	size_t	i;

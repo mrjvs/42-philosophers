@@ -11,6 +11,7 @@ SOURCES=\
 	philosophers/logger.c \
 	philosophers/starve.c \
 	utils/string.c \
+	utils/int.c \
 	boot/starter.c \
 	boot/arg_parse.c
 

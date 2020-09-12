@@ -31,7 +31,7 @@ typedef struct	s_thread_args
 }				t_thread_args;
 
 
-void	parse_args(int argc, char *argv[], t_phil_args *args);
+int		parse_args(int argc, char *argv[], t_phil_args *args);
 void	boot_sequence(t_phil_args *args);
 
 #endif
