@@ -18,6 +18,7 @@ make
 ## TODO
  - [X] argv parsing
  - [ ] Fork taking
+ - [ ] Error handling
  - [X] Give every philosopher a starvation checker thread*
  - [X] Remove printf statement in logger.c
  - [X] Dynamic sleep settings
