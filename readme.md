@@ -16,7 +16,7 @@ make
 ```
 
 ## TODO
- - [ ] argv parsing
+ - [X] argv parsing
  - [ ] Fork taking
  - [X] Give every philosopher a starvation checker thread*
  - [X] Remove printf statement in logger.c

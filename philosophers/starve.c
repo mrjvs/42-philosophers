@@ -28,4 +28,5 @@ void		start_starve_worker(t_phil *phil) {
 	pthread_t tid;
 
 	pthread_create(&tid, NULL, starve_checker, (void *)phil);
+	pthread_detach(tid);
 }

@@ -11,7 +11,7 @@ static int	is_valid_int(char *str) {
 			return (0);
 		i++;
 	}
-	if (i > INT_CHARLEN)
+	if (i > INT_CHARLEN || phil_atoi(str) > INT_MAXLEN)
 		return (0);
 	return (1);
 }
