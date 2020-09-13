@@ -1,9 +1,6 @@
+#include <stddef.h>
 #include "boot.h"
 #include "philosopher.h"
-
-int				should_run(t_phil *phil) {
-	return (!phil->is_dead && phil->args->goal_data != 0 && !phil->args->crash_exit);
-}
 
 static t_phil	make_phil_state(t_phil_args *args, int id) {
 	t_phil	phil;
@@ -26,7 +23,7 @@ void			*create_philosopher(void *arg) {
 	activity = 0;
 	while (should_run(&phil)) {
 		if (!do_action(&phil, activity))
-			phil.args->crash_exit = 1;
+			trigger_crash(&phil);
 		activity++;
 		if (activity > 2)
 			activity = 0;

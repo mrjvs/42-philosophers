@@ -1,6 +1,7 @@
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
+# include <pthread.h>
 # include "boot.h"
 
 # define STARVE_WORKER_SLEEP_MS 1
@@ -28,5 +29,8 @@ int			do_action(t_phil *phil, int activity);
 long long	get_time_in_ms(void);
 void		start_starve_worker(t_phil *phil);
 int			should_run(t_phil *phil);
+void		finish_eat_goal(t_phil *phil);
+void		trigger_has_died(t_phil *phil);
+void		trigger_crash(t_phil *phil);
 
 #endif

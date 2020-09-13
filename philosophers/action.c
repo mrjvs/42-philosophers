@@ -7,7 +7,7 @@ static int	do_eat(t_phil *phil) {
 	if (phil->eat_countdown > 0) {
 		phil->eat_countdown--;
 		if (phil->eat_countdown == 0)
-			phil->args->goal_data--;
+			finish_eat_goal(phil);
 	}
 	return (1);
 }

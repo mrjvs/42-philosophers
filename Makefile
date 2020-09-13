@@ -10,8 +10,10 @@ SOURCES=\
 	philosophers/action.c \
 	philosophers/logger.c \
 	philosophers/starve.c \
+	philosophers/communication-shared.c \
 	utils/string.c \
 	utils/int.c \
+	starters/thread.c \
 	boot/starter.c \
 	boot/arg_parse.c
 
