@@ -26,7 +26,6 @@ make
  - [X] Make system compatible with both Death goal and Eat goal at the same time
  - [X] Figure out how to do the Eat goal with processes (two semaphores, eatgoal channel and death channel. at death. trigger both channels)
  - [X] cleanup everything, holy shit its spaghetti
- - [ ] add lock for 
  - [ ] code generation**
 
 \* Starvation checker thread sets the death state and prints if starved
