@@ -22,10 +22,12 @@ make
  - [X] Give every philosopher a starvation checker thread*
  - [X] Remove printf statement in logger.c
  - [X] Dynamic sleep settings
- - [ ] Make all three programs (code generation)**
+ - [X] Make all three programs (code generation)**
  - [X] Make system compatible with both Death goal and Eat goal at the same time
  - [X] Figure out how to do the Eat goal with processes (two semaphores, eatgoal channel and death channel. at death. trigger both channels)
- - [ ] cleanup everything, holy shit its spaghetti
+ - [X] cleanup everything, holy shit its spaghetti
+ - [ ] add lock for 
+ - [ ] code generation**
 
 \* Starvation checker thread sets the death state and prints if starved
 

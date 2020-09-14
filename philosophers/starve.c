@@ -9,8 +9,8 @@ static void	*starve_checker(void *arg) {
 	phil = (t_phil *)arg;
 	while (should_run(phil)) {
 		if (phil->last_meal + phil->args->time_to_die < get_time_in_ms()) {
-			trigger_has_died(phil);
 			phil->is_dead = 1;
+			trigger_has_died(phil);
 			break ;
 		}
 		usleep(STARVE_WORKER_SLEEP_MS * 1000);

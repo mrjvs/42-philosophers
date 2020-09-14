@@ -7,9 +7,11 @@
 # define SEM_CRASH_LOCK "philosophersCrashLock"
 
 
-# define COMPILE_PHIL_THREADS
+# define COMPILE_PHIL_PROCESSES
 
-# ifdef COMPILE_COM_SHAREDMEM
+# ifdef COMPILE_PHIL_THREADS
+
+#  include <pthread.h>
 
 typedef struct	s_phil_args {
 	int 			amount;
@@ -22,9 +24,19 @@ typedef struct	s_phil_args {
 	int				crash_exit;
 }				t_phil_args;
 
-# else
+typedef struct	s_thread_args
+{
+	t_phil_args	*args;
+	int			id;
+	pthread_t	tid;
+}				t_thread_args;
+
+# endif
+# ifdef COMPILE_PHIL_PROCESSES
 
 #  include <semaphore.h>
+#  include <sys/types.h>
+#  include <sys/wait.h>
 
 typedef struct	s_phil_args {
 	int 			amount;
@@ -38,22 +50,6 @@ typedef struct	s_phil_args {
 	sem_t			*phil_crash_lock;
 }				t_phil_args;
 
-# endif
-
-# ifdef COMPILE_PHIL_THREADS
-
-#  include <pthread.h>
-typedef struct	s_thread_args
-{
-	t_phil_args	*args;
-	int			id;
-	pthread_t	tid;
-}				t_thread_args;
-
-# else
-
-#  include <sys/types.h>
-#  include <sys/wait.h>
 typedef struct	s_thread_args
 {
 	t_phil_args	*args;
@@ -66,6 +62,6 @@ typedef struct	s_thread_args
 int		parse_args(int argc, char *argv[], t_phil_args *args);
 int		boot_sequence(t_phil_args *args);
 int		start_philosophers(t_phil_args *args);
-void	init_args(t_phil_args *args);
+int		init_args(t_phil_args *args);
 
 #endif

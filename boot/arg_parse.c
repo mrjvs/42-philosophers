@@ -36,9 +36,17 @@ int		parse_args(int argc, char *argv[], t_phil_args *args) {
 	args->time_to_eat = phil_atoi(argv[3]);
 	args->time_to_sleep = phil_atoi(argv[4]);
 	args->eat_goal_amount = 0;
-	if (argc == 6)
+	if (argc == 6) {
 		args->eat_goal_amount = phil_atoi(argv[5]);
+		if (args->eat_goal_amount == 0) {
+			write(1, "Eat goal must not be below 1\n", 30);
+			return (0);
+		}
+	}
 	args->crash_exit = 0;
-	init_args(args);
+	if (!init_args(args)) {
+		args->crash_exit = 1;
+		return (0);
+	}
 	return (1);
 }

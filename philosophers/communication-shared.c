@@ -18,7 +18,7 @@ int		should_run(t_phil *phil) {
 	return (!phil->is_dead && phil->args->eat_goal_counter != 0 && !phil->args->crash_exit);
 }
 
-void	init_args(t_phil_args *args) {
+int		init_args(t_phil_args *args) {
 	args->has_died = 0;
 	args->eat_goal_counter = args->amount;
 }
