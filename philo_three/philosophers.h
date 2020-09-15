@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/14 16:49:56 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 12:38:29 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define INT_MAXLEN 2147483647
 
 # define SEM_DIE_LOCK "philosophersDieLock"
+# define SEM_FORKS "philosophersForks"
 # define SEM_EAT_LOCK "philosophersEatLock"
 # define SEM_CRASH_LOCK "philosophersCrashLock"
 # define SEM_LOGGING_LOCK "philosophersLoggingLock"
@@ -36,6 +37,11 @@ enum			e_philstate {
 	Thinking = 2,
 	Taking = 3,
 	Dying = 4
+};
+
+enum			e_forkside {
+	LeftSide,
+	RightSide
 };
 
 /*
@@ -53,6 +59,7 @@ typedef struct	s_phil_args {
 	sem_t			*phil_died_lock;
 	sem_t			*phil_eat_lock;
 	sem_t			*phil_crash_lock;
+	sem_t			*forks;
 }				t_phil_args;
 
 /*
@@ -108,6 +115,15 @@ void			lock_logging(t_phil_args *args);
 void			unlock_logging(t_phil_args *args);
 int				init_locks(t_phil_args *args);
 void			destroy_locks(t_phil_args *args);
+
+/*
+** forks
+*/
+
+int				init_forks(t_phil_args *args);
+int				destroy_forks(t_phil_args *args);
+int				take_fork(t_phil *phil, enum e_forkside side);
+int				return_fork(t_phil *phil, enum e_forkside side);
 
 /*
 ** string and number utils

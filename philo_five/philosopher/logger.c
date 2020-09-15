@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:38 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:32:37 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 16:32:52 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 long long	get_time_in_ms(void)
 {
-	struct timeval	time;
+	static struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));

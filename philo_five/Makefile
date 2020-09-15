@@ -6,11 +6,11 @@
 #    By: mrjvs <mrjvs@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/14 16:00:56 by mrjvs         #+#    #+#                  #
-#    Updated: 2020/09/15 12:41:44 by mrjvs         ########   odam.nl          #
+#    Updated: 2020/09/15 16:31:19 by mrjvs         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=phil
+NAME=philo_five
 CC=gcc
 FLAGS=-pthread -g
 

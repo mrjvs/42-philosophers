@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 14:43:07 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 15:56:33 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,12 @@
 
 # include <stddef.h>
 # include <pthread.h>
-# include <semaphore.h>
-# include <fcntl.h>
-# include <sys/stat.h>
 
-# define SEM_PERMS S_IRUSR | S_IWUSR | S_IRGRP
+# include "philosophers_process_sem.h"
 
 # define LLINT_CHARLEN 19
 # define INT_CHARLEN 10
 # define INT_MAXLEN 2147483647
-
-# define SEM_DIE_LOCK "philosophersDieLock"
-# define SEM_FORKS "philosophersForks"
-# define SEM_EAT_LOCK "philosophersEatLock"
-# define SEM_CRASH_LOCK "philosophersCrashLock"
-# define SEM_LOGGING_LOCK "philosophersLoggingLock"
 
 enum			e_philstate {
 	Eating = 0,
@@ -39,34 +30,10 @@ enum			e_philstate {
 	Dying = 4
 };
 
-/*
-** t_phil_args, global data shared accross threads/processes
-*/
-
-typedef struct	s_phil_args {
-	int				amount;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				eat_goal_amount;
-	int				eat_goal_counter;
-	int				has_died;
-	int				crash_exit;
-	sem_t			*logging_lock;
-	sem_t			*forks;
-}				t_phil_args;
-
-/*
-** t_thread_args, data specific per philosopher thread.
-** its passed in on thread creation
-*/
-
-typedef struct	s_thread_args
-{
-	t_phil_args	*args;
-	int			id;
-	pthread_t	tid;
-}				t_thread_args;
+enum			e_forkside {
+	LeftSide,
+	RightSide
+};
 
 /*
 ** t_phil, represent a philosopher
