@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 15:27:44 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 16:43:40 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_phil_args {
 	int				has_died;
 	int				crash_exit;
 	pthread_mutex_t	logging_lock;
+	pthread_mutex_t	*forks;
 }				t_phil_args;
 
 /*

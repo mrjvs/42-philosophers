@@ -58,4 +58,6 @@ build () {
     echo "Finished compiling $1"
 }
 
-build "philo_five" "process_sem"
+build "philo_one" "shared_mutex"
+build "philo_two" "shared_sem"
+build "philo_three" "process_sem"
