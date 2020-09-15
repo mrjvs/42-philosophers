@@ -6,13 +6,12 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:42 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:21:25 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:17:06 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <signal.h>
 #include "philosophers.h"
 
 /*
@@ -59,10 +58,28 @@ static int	start_workers(t_phil_args *args)
 	return (1);
 }
 
+static void	do_thing(t_thread_args *tid, t_phil_args *args, int *i)
+{
+	tid->id = *i;
+	tid->args = args;
+	tid->tid = fork();
+	if (tid->tid == 0)
+	{
+		create_philosopher((void *)tid);
+		exit(0);
+	}
+	else if (tid->tid < 0)
+	{
+		lock_logging(args);
+		args->crash_exit = 1;
+		sem_post(args->phil_died_lock);
+	}
+	(*i)++;
+}
+
 int			start_philosophers(t_phil_args *args)
 {
 	int				i;
-	pid_t			temp;
 	t_thread_args	*tid;
 
 	if (!start_workers(args))
@@ -72,31 +89,8 @@ int			start_philosophers(t_phil_args *args)
 		return (0);
 	i = 0;
 	while (i < args->amount)
-	{
-		tid[i].id = i;
-		tid[i].args = args;
-		temp = fork();
-		if (temp == 0)
-		{
-			create_philosopher((void *)&(tid[i]));
-			exit(0);
-		}
-		else if (temp < 0)
-		{
-			lock_logging(args);
-			args->crash_exit = 1;
-			sem_post(args->phil_died_lock);
-		}
-		tid[i].tid = temp;
-		i++;
-	}
+		do_thing(tid + i, args, &i);
 	sem_wait(args->phil_died_lock);
-	i = 0;
-	while (i < args->amount)
-	{
-		kill(tid[i].tid, SIGKILL);
-		i++;
-	}
-	free(tid);
+	stop_philosophers(tid, args);
 	return (1);
 }

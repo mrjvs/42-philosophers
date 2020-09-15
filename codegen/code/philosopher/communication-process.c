@@ -6,10 +6,12 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:27 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:22:31 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:18:06 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
+#include <stdlib.h>
 #include "philosophers.h"
 
 /*
@@ -23,7 +25,6 @@ void	finish_eat_goal(t_phil *phil)
 
 void	trigger_has_died(t_phil *phil)
 {
-	lock_logging(phil->args);
 	log_state(Dying, phil->id, phil->args);
 	sem_post(phil->args->phil_died_lock);
 }
@@ -44,9 +45,24 @@ int		init_args(t_phil_args *args)
 	sem_unlink(SEM_DIE_LOCK);
 	sem_unlink(SEM_EAT_LOCK);
 	sem_unlink(SEM_CRASH_LOCK);
-	if (args->phil_died_lock == SEM_FAILED || args->phil_eat_lock == SEM_FAILED || args->phil_crash_lock == SEM_FAILED)
+	if (args->phil_died_lock == SEM_FAILED ||
+		args->phil_eat_lock == SEM_FAILED ||
+		args->phil_crash_lock == SEM_FAILED)
 		return (0);
 	if (!init_locks(args))
 		return (0);
 	return (1);
+}
+
+void	stop_philosophers(t_thread_args *tid, t_phil_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->amount)
+	{
+		kill(tid[i].tid, SIGKILL);
+		i++;
+	}
+	free(tid);
 }

@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 15:56:33 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 17:50:29 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void			start_starve_worker(t_phil *phil);
 ** Philosopher communication
 */
 
-int				should_run(t_phil_args *args);
 void			finish_eat_goal(t_phil *phil);
 void			trigger_has_died(t_phil *phil);
 void			trigger_crash(t_phil *phil);

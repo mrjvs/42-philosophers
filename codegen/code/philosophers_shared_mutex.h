@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:43:40 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 17:50:47 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ typedef struct	s_thread_args
 	int			id;
 	pthread_t	tid;
 }				t_thread_args;
+
+int				should_run(t_phil_args *args);
 
 #endif

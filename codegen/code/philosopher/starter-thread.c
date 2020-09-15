@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   starter.c                                          :+:    :+:            */
+/*   starter-thread.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:42 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/14 16:00:43 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 17:51:06 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 static void	wait_philosophers(t_phil_args *args)
 {
 	while (should_run(args))
-		usleep(1000);
+	{
+	}
 }
 
 int			start_philosophers(t_phil_args *args)

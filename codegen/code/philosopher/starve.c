@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:44 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:28:38 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 17:48:47 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	*starve_checker(void *arg)
 		lock_logging(phil->args);
 		if (phil->last_meal + phil->args->time_to_die < get_time_in_ms())
 		{
-			// eats
 			trigger_has_died(phil);
 			break ;
 		}

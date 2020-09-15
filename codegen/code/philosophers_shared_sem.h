@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:26:07 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 17:53:20 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/stat.h>
+
+# define SEM_FORKS "philosophersForks"
+# define SEM_LOGGING_LOCK "philosophersLoggingLock"
 
 # define SEM_PERMS 416
 
@@ -47,5 +50,7 @@ typedef struct	s_thread_args
 	int			id;
 	pthread_t	tid;
 }				t_thread_args;
+
+int				should_run(t_phil_args *args);
 
 #endif
