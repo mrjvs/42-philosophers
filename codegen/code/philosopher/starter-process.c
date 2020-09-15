@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:42 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 18:17:06 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:27:31 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	*crash_worker(void *arg)
 	lock_logging(args);
 	args->crash_exit = 1;
 	sem_post(args->phil_died_lock);
+	return (NULL);
 }
 
 static void	*eat_worker(void *arg)
@@ -43,6 +44,7 @@ static void	*eat_worker(void *arg)
 	}
 	lock_logging(args);
 	sem_post(args->phil_died_lock);
+	return (NULL);
 }
 
 static int	start_workers(t_phil_args *args)

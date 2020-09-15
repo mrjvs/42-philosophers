@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:30 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 16:28:12 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:27:02 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void			*create_philosopher(void *arg)
 		((t_thread_args *)arg)->id);
 	start_starve_worker(&phil);
 	main_loop(&phil);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 18:17:24 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:29:43 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct	s_thread_args
 {
 	t_phil_args	*args;
 	int			id;
-	pthread_t	tid;
+	pid_t		tid;
 }				t_thread_args;
 
 void			stop_philosophers(t_thread_args *tid, t_phil_args *args);

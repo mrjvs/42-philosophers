@@ -6,13 +6,13 @@
 #    By: mrjvs <mrjvs@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/14 16:00:56 by mrjvs         #+#    #+#                  #
-#    Updated: 2020/09/15 16:31:19 by mrjvs         ########   odam.nl          #
+#    Updated: 2020/09/15 18:25:54 by mrjvs         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=NAMEHERE
 CC=gcc
-FLAGS=-pthread -g
+FLAGS=-pthread -Werror -Wall -Wextra
 
 INCLUDES=./
 

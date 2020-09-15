@@ -17,7 +17,7 @@ make
 
 ## TODO
  - [X] argv parsing
- - [ ] Fork taking
+ - [X] Fork taking
  - [X] Error handling
  - [X] Give every philosopher a starvation checker thread*
  - [X] Remove printf statement in logger.c
@@ -33,8 +33,8 @@ make
 \*\* A script that copies all sources into export folder with file choices
 
 ## Before turnin
- - [ ] Add error flags
- - [ ] Check norm
- - [ ] Check subject
- - [ ] Check leaks
- - [ ] Remove debug symbols
+ - [X] Add error flags
+ - [X] Check norm
+ - [X] Check subject
+ - [X] Check leaks
+ - [X] Remove debug symbols

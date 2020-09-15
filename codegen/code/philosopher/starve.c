@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:44 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 17:48:47 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/15 18:27:14 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	*starve_checker(void *arg)
 		unlock_logging(phil->args);
 		usleep(1000);
 	}
+	return (NULL);
 }
 
 void		start_starve_worker(t_phil *phil)
