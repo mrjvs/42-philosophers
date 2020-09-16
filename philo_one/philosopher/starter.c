@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:42 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 17:51:06 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/16 11:23:29 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			start_philosophers(t_phil_args *args)
 		}
 		else
 			pthread_detach(tid[i].tid);
+		usleep(100);
 		i++;
 	}
 	wait_philosophers(args);

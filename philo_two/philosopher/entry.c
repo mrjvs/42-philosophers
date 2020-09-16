@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:30 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 18:27:02 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/16 11:18:48 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static t_phil	make_phil_state(t_phil_args *args, int id)
 	phil.id = id;
 	phil.args = args;
 	phil.eat_countdown = args->eat_goal_amount;
-	phil.starve_worker = -1;
 	return (phil);
 }
 

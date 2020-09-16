@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 16:00:42 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 18:27:31 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/16 11:22:39 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	*eat_worker(void *arg)
 	return (NULL);
 }
 
-static int	start_workers(t_phil_args *args)
+static int	start_workers(t_phil_args *args, int *i)
 {
 	pthread_t	tid;
 
@@ -57,6 +57,7 @@ static int	start_workers(t_phil_args *args)
 	if (pthread_create(&tid, NULL, eat_worker, (void *)args) != 0)
 		return (0);
 	pthread_detach(tid);
+	*i = 0;
 	return (1);
 }
 
@@ -84,14 +85,14 @@ int			start_philosophers(t_phil_args *args)
 	int				i;
 	t_thread_args	*tid;
 
-	if (!start_workers(args))
-		return (0);
 	tid = (t_thread_args *)malloc(args->amount * sizeof(t_thread_args));
-	if (tid == NULL)
+	if (!start_workers(args, &i) || tid == NULL)
 		return (0);
-	i = 0;
 	while (i < args->amount)
+	{
 		do_thing(tid + i, args, &i);
+		usleep(100);
+	}
 	sem_wait(args->phil_died_lock);
 	stop_philosophers(tid, args);
 	return (1);
