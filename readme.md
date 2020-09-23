@@ -6,6 +6,6 @@ Oops, I made it too spaghetti
  - [X] Error handling (make crash trigger also lock logs)
  - [X] Free on error
  - [X] Make eat goal lock logs (eat goal reached -> lock logs -> trigger eat countdown, unlock logs at main thread)
- - [ ] Make the rest of the programs
+ - [X] Make the rest of the programs
  - [X] Parse args
  - [X] log without printf
