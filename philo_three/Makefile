@@ -6,7 +6,7 @@
 #    By: mrjvs <mrjvs@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/09/14 16:00:56 by mrjvs         #+#    #+#                  #
-#    Updated: 2020/09/23 16:33:17 by mrjvs         ########   odam.nl          #
+#    Updated: 2020/09/23 18:32:01 by mrjvs         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SOURCES=\
 	action.c \
 	starve.c \
 	parse.c \
-	destroy.c
+	destroy.c \
+	starter_two.c
 
 OBJ=$(SOURCES:.c=.o)
 

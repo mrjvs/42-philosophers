@@ -6,13 +6,13 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/16 14:24:16 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/23 16:28:41 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/23 18:33:15 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <signal.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "philosophers.h"
 
 void		*philosopher_routine(void *args)
@@ -93,23 +93,8 @@ int			seat_philosophers(t_phil_global *globals)
 	i = 0;
 	while (i < globals->amount)
 	{
-		threads[i].id = i;
-		threads[i].globals = globals;
-		threads[i].tid = fork();
-		if (threads[i].tid == -1)
-		{
-			sem_wait(globals->log_lock);
-			sem_post(globals->die_lock);
-			globals->crash_exit = 1;
+		if (inside_while_loop(globals, threads, &i) == 0)
 			break ;
-		}
-		else if (threads[i].tid == 0)
-		{
-			philosopher_routine((void *)(threads + i));
-			exit(1);
-		}
-		usleep(100);
-		i++;
 	}
 	sem_wait(globals->die_lock);
 	while (i >= 0)

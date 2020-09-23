@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/16 12:41:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/23 16:32:55 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/23 18:32:30 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,8 @@ int								parse_args(int argc, char *argv[],\
 int								destroy_forks(t_phil_global *global);
 void							destroy_locks(t_phil_global *globals);
 int								destroy_phil(t_phil *arr, char *c);
+int								inside_while_loop(t_phil_global *globals,\
+									t_phil_thread *threads, int *i);
+void							*philosopher_routine(void *args);
 
 #endif
