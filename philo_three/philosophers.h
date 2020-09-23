@@ -5,94 +5,83 @@
 /*                                                     +:+                    */
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/14 16:00:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/15 17:50:29 by mrjvs         ########   odam.nl         */
+/*   Created: 2020/09/16 12:41:52 by mrjvs         #+#    #+#                 */
+/*   Updated: 2020/09/23 16:32:55 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <stddef.h>
+# include <sys/types.h>
 # include <pthread.h>
+# include <semaphore.h>
 
-# include "philosophers_process_sem.h"
-
-# define LLINT_CHARLEN 19
-# define INT_CHARLEN 10
-# define INT_MAXLEN 2147483647
-
-enum			e_philstate {
-	Eating = 0,
-	Sleeping = 1,
-	Thinking = 2,
-	Taking = 3,
-	Dying = 4
+enum							e_logtype {
+	Dielog,
+	Takelog,
+	Sleeplog,
+	Eatlog,
+	ThinkLog
 };
 
-enum			e_forkside {
-	LeftSide,
-	RightSide
+enum							e_exittype {
+	Dieexit,
+	Crashexit,
+	Goalreachedexit
 };
 
-/*
-** t_phil, represent a philosopher
-*/
+typedef struct s_phil_global	t_phil_global;
 
-typedef struct	s_phil {
-	char		is_dead;
-	long		last_meal;
-	int			id;
-	int			eat_countdown;
-	t_phil_args	*args;
-	pthread_t	starve_worker;
-}				t_phil;
+typedef struct					s_phil {
+	int					id;
+	sem_t				*eat_lock;
+	unsigned long long	last_ate;
+	int					eat_countdown;
+	t_phil_global		*globals;
+}								t_phil;
 
-/*
-** Philosopher thread functions
-*/
+struct							s_phil_global
+{
+	int				time_to_sleep;
+	int				time_to_eat;
+	int				time_to_die;
+	int				amount;
+	int				eat_goal;
+	int				crash_exit;
+	int				should_exit;
+	sem_t			*forks;
+	enum e_exittype	exit_cause;
+	sem_t			*log_lock;
+	sem_t			*die_lock;
+	sem_t			*crash_lock;
+	sem_t			*eat_lock;
+	t_phil			*phil_arr;
+};
 
-void			*create_philosopher(void *arg);
-int				start_philosophers(t_phil_args *args);
-int				log_state(enum e_philstate state, int id, t_phil_args *args);
-int				do_action(t_phil *phil, int activity);
-long long		get_time_in_ms(void);
-void			start_starve_worker(t_phil *phil);
+typedef struct					s_phil_thread {
+	int				id;
+	t_phil_global	*globals;
+	pid_t			tid;
+}								t_phil_thread;
 
-/*
-** Philosopher communication
-*/
+int								phil_log(t_phil *phil, enum e_logtype type);
+unsigned long long				get_time(void);
+int								init_globals(t_phil_global *globals);
+int								seat_philosophers(t_phil_global *globals);
+int								start_starve_worker(t_phil *phil);
 
-void			finish_eat_goal(t_phil *phil);
-void			trigger_has_died(t_phil *phil);
-void			trigger_crash(t_phil *phil);
-int				init_args(t_phil_args *args);
-
-/*
-** locking
-*/
-
-void			lock_logging(t_phil_args *args);
-void			unlock_logging(t_phil_args *args);
-int				init_locks(t_phil_args *args);
-void			destroy_locks(t_phil_args *args);
-
-/*
-** forks
-*/
-
-int				init_forks(t_phil_args *args);
-int				destroy_forks(t_phil_args *args);
-int				take_fork(t_phil *phil, enum e_forkside side);
-int				return_fork(t_phil *phil, enum e_forkside side);
-
-/*
-** string and number utils
-*/
-
-int				parse_args(int argc, char *argv[], t_phil_args *args);
-size_t			phil_strlen(char *str);
-char			*phil_make_log(long long time, int id, char *text);
-long			phil_atoi(char *str);
+void							phil_eat(t_phil *phil);
+void							yeet_forks(t_phil *phil);
+void							weaponize_forks(t_phil *phil);
+void							phil_sleep(t_phil *phil);
+void							clear_globals(t_phil_global *globals);
+ssize_t							phil_putnbr(unsigned long long n);
+size_t							phil_strlen(char *str);
+int								parse_args(int argc, char *argv[],\
+											t_phil_global *globals);
+int								destroy_forks(t_phil_global *global);
+void							destroy_locks(t_phil_global *globals);
+int								destroy_phil(t_phil *arr, char *c);
 
 #endif
