@@ -15,20 +15,20 @@
 
 int		destroy_forks(t_phil_global *global)
 {
-	sem_destroy(global->forks);
+	sem_close(global->forks);
 	return (1);
 }
 
 void	destroy_locks(t_phil_global *globals)
 {
 	if (globals->crash_lock != SEM_FAILED)
-		sem_destroy(globals->crash_lock);
+		sem_close(globals->crash_lock);
 	if (globals->die_lock != SEM_FAILED)
-		sem_destroy(globals->die_lock);
+		sem_close(globals->die_lock);
 	if (globals->eat_lock != SEM_FAILED)
-		sem_destroy(globals->eat_lock);
+		sem_close(globals->eat_lock);
 	if (globals->log_lock != SEM_FAILED)
-		sem_destroy(globals->log_lock);
+		sem_close(globals->log_lock);
 }
 
 int		destroy_phil(t_phil *arr, char *c)
