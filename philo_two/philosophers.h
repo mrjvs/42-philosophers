@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/16 12:41:52 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/23 16:26:05 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/24 10:06:15 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 
-# define PHIL_SEM_MODE 0644
+# define PHILSEM 0644
 
 enum							e_logtype {
 	Dielog,

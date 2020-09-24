@@ -6,7 +6,7 @@
 /*   By: mrjvs <mrjvs@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/16 13:51:59 by mrjvs         #+#    #+#                 */
-/*   Updated: 2020/09/23 16:25:08 by mrjvs         ########   odam.nl         */
+/*   Updated: 2020/09/24 10:07:21 by mrjvs         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static int	init_forks(t_phil_global *global)
 {
 	global->forks = sem_open("philosophersForksSem", O_CREAT,\
-	PHIL_SEM_MODE, global->amount);
+	PHILSEM, global->amount);
 	if (global->forks == SEM_FAILED)
 		return (0);
 	sem_unlink("philosophersForksSem");
@@ -62,7 +62,7 @@ static int	init_phils(t_phil_global *globals)
 		c = make_phil_string(i);
 		if (c == NULL)
 			return (destroy_phil(globals->phil_arr, c));
-		globals->phil_arr[i].eat_lock = sem_open(c, O_CREAT, PHIL_SEM_MODE, 1);
+		globals->phil_arr[i].eat_lock = sem_open(c, O_CREAT, PHILSEM, 1);
 		if (globals->phil_arr[i].eat_lock == SEM_FAILED)
 			return (destroy_phil(globals->phil_arr, c));
 		sem_unlink(c);
@@ -79,10 +79,11 @@ int			init_globals(t_phil_global *globals)
 {
 	if (!init_forks(globals))
 		return (0);
-	globals->crash_lock = sem_open("philosophersCrashLock", O_CREAT, PHIL_SEM_MODE, 0);
-	globals->die_lock = sem_open("philosophersDieLock", O_CREAT, PHIL_SEM_MODE, 0);
-	globals->eat_lock = sem_open("philosophersEatLock", O_CREAT, PHIL_SEM_MODE, 0);
-	globals->log_lock = sem_open("philosophersLogLock", O_CREAT, PHIL_SEM_MODE, 1);
+	globals->crash_lock = sem_open("philosophersCrashLock",\
+									O_CREAT, PHILSEM, 0);
+	globals->die_lock = sem_open("philosophersDieLock", O_CREAT, PHILSEM, 0);
+	globals->eat_lock = sem_open("philosophersEatLock", O_CREAT, PHILSEM, 0);
+	globals->log_lock = sem_open("philosophersLogLock", O_CREAT, PHILSEM, 1);
 	sem_unlink("philosophersCrashLock");
 	sem_unlink("philosophersDieLock");
 	sem_unlink("philosophersEatLock");
