@@ -97,7 +97,7 @@ int			seat_philosophers(t_phil_global *globals)
 			break ;
 	}
 	sem_wait(globals->die_lock);
-	while (i >= 0)
+	while (i > 0)
 	{
 		i--;
 		kill(threads[i].tid, SIGKILL);
